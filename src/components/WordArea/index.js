@@ -4,7 +4,7 @@ import playBtn from '../../assets/images/icon/play_btn.svg'
 import SectionHeader from '../SectionHeader'
 
 const WordArea = ({ word, audio }) => {
-
+  // {word[0] === undefined ? <li>No definition</li> : <li> {word[0].meanings[2]}</li>}
   if (word !== null) {
     return (
       <Container>
@@ -26,12 +26,15 @@ const WordArea = ({ word, audio }) => {
           </ul>
           <p>Synonyms <button>eletronic keyboard</button></p>
         </SectionBody>
-        <SectionHeader title='verb' />
+        <SectionHeader title='examples' />
         <SectionBody>
           <p>Meaning</p>
           <ul>
-            <li>To type on a computer keyboard.</li>
-
+            {
+              word && word[0].meanings[word[0].meanings.length - 1].definitions.map((set, index) => {
+                return set.example === undefined ? null : <li key={index}>{set.example}</li>
+              })
+            }
           </ul>
 
 

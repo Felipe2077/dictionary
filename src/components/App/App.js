@@ -26,9 +26,9 @@ function App() {
     fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${input}`).then((response) => response.json()).then((json) => json.title === undefined ? setWord(json) : setWord(null));
   }, [input]);
 
-  React.useEffect(() => {
-    setAudio(word ? word[0].phonetics[0].audio : undefined);
-  }, [word]);
+  // React.useEffect(() => {
+  //   setAudio(word ? word[0].phonetics[0].audio : undefined);
+  // }, [word]);
 
   function handleCLick() {
     setIsDark(!isDark)
@@ -59,7 +59,8 @@ function App() {
     }
   }
 
-  console.log(audio);
+
+
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
