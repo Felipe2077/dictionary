@@ -9,7 +9,7 @@ import WordArea from '../WordArea';
 import { Container } from './styles';
 import lightButton from '../../assets/images/icon/light_button.svg'
 import darkButton from '../../assets/images/icon/dark_button.svg'
-import InputBox from '../Input/Input'
+import { InputButton } from '../Input/Input'
 import Error from '../Error';
 
 function App() {
@@ -20,15 +20,21 @@ function App() {
   const [typographyTheme, setTypography] = useState('Inter');
   const [input, setInput] = React.useState('house');
   const [audio, setAudio] = React.useState(undefined);
+
+
   const theme = { fontFamily: typographyTheme, typography: typography, color: colorTheme };
 
+  //** Refatorar com AXIOS *******
   React.useEffect(() => {
     fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${input}`).then((response) => response.json()).then((json) => json.title === undefined ? setWord(json) : setWord(null));
   }, [input]);
 
-  // React.useEffect(() => {
-  //   setAudio(word ? word[0].phonetics[0].audio : undefined);
-  // }, [word]);
+
+
+  React.useEffect(() => {
+    //* fazer um async await para gerenciar o audio 
+    setAudio(word ? word[0].phonetics[0].audio : undefined);
+  }, [word]);
 
   function handleCLick() {
     setIsDark(!isDark)
@@ -54,7 +60,6 @@ function App() {
     } else {
       setTimeout(() => {
         setInput(event.target.value);
-
       }, 1000)
     }
   }
@@ -67,7 +72,7 @@ function App() {
         <GlobalStyles />
         <Container>
           <Header handleTypography={handleTypography} handleTheme={handleCLick} themeImg={themeImg} />
-          <InputBox handleInput={handleInput} />
+          <InputButton handleInput={handleInput} />
           {word === null ? <Error /> : <WordArea word={word} audio={audio} />}
 
         </Container>

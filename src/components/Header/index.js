@@ -1,6 +1,5 @@
 import React from 'react';
 import headerLogo from '../../assets/images/icon/icon_book.svg'
-
 import moonIcon from '../../assets/images/icon/icon_half_moon.svg'
 import { Container, Menu, MenuButtons, TypographyItems, Input, SearchArea, HeaderContainer } from './styles';
 import TypoSwitcher from './TypoSwitcher';
